@@ -27,7 +27,7 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
         return Entities.Where(predicate);
     }
 
-    public T Add(T entity)
+    public virtual T Add(T entity)
     {
         return Entities.Add(entity).Entity;
     }
