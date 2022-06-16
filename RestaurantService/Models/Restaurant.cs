@@ -9,6 +9,6 @@ public class Restaurant
     [Required]
     public string? Name { get; set; }
     
-    public ICollection<Dish?> Menu { get; set; } = new List<Dish?>();
-    public ICollection<Rating?> Ratings { get; set; } = new List<Rating?>();
+    public ICollection<Dish> Menu { get; set; } = new List<Dish>();
+    public ICollection<Rating> Ratings { get; set; } = new List<Rating>();
 }

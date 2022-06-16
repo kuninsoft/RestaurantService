@@ -14,5 +14,5 @@ public class User
     [Required]
     public Role Role { get; set; }
 
-    public ICollection<Rating?> RatingsWritten { get; set; } = new List<Rating?>();
+    public ICollection<Rating> RatingsWritten { get; set; } = new List<Rating>();
 }
