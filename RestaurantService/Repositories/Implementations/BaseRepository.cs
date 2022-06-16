@@ -12,7 +12,7 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
         Entities = context.Set<T>();
     }
     
-    public T? Find(int id)
+    public T? Get(int id)
     {
         return Entities.Find(id);
     }
@@ -22,7 +22,7 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
         return Entities.ToList();
     }
 
-    public IEnumerable<T> Get(Expression<Func<T, bool>> predicate)
+    public IEnumerable<T> Filter(Expression<Func<T, bool>> predicate)
     {
         return Entities.Where(predicate);
     }

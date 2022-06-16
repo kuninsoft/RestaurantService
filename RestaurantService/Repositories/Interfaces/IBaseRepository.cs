@@ -4,9 +4,9 @@ namespace RestaurantService.Repositories;
 
 public interface IBaseRepository<T> where T : class
 {
-    T? Find(int id);
+    T? Get(int id);
     IEnumerable<T> GetAll();
-    IEnumerable<T> Get(Expression<Func<T, bool>> predicate);
+    IEnumerable<T> Filter(Expression<Func<T, bool>> predicate);
     T Add(T entity); 
     void Delete(T entity);
 }

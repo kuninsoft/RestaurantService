@@ -1,6 +1,7 @@
+using RestaurantService.Models;
+
 namespace RestaurantService.Repositories.Interfaces;
 
-public interface IDishRepository
+public interface IDishRepository : IBaseRepository<Dish>
 {
-    
 }

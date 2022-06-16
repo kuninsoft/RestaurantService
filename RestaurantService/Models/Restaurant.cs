@@ -8,4 +8,7 @@ public class Restaurant
     public int Id { get; set; }
     [Required]
     public string? Name { get; set; }
+    
+    public ICollection<Dish?> Menu { get; set; } = new List<Dish?>();
+    public ICollection<Rating?> Ratings { get; set; } = new List<Rating?>();
 }
