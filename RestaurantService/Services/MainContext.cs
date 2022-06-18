@@ -3,7 +3,7 @@ using RestaurantService.Models;
 
 namespace RestaurantService.Services;
 
-public class MainContext : DbContext
+public sealed class MainContext : DbContext
 {
     private string DbPath { get; set; }
     
@@ -15,6 +15,8 @@ public class MainContext : DbContext
     {
         string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         DbPath = Path.Join(path, "restaurants.db");
+        
+        Database.Migrate();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options) 
