@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace RestaurantService.Repositories;
+namespace RestaurantService.Repositories.Interfaces;
 
 public interface IBaseRepository<T> where T : class
 {

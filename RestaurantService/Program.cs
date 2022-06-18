@@ -1,23 +1,19 @@
-using RestaurantService.Models;
-using RestaurantService.Repositories;
+using RestaurantService.Services;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-// builder.Services.AddTransient(typeof(IRepository<Dish>), typeof(Repository<Dish>));
-// builder.Services.AddTransient<IRepository<Restaurant>, Repository<Restaurant>>();
-// builder.Services.AddTransient<IRepository<RestaurantDish>, Repository<RestaurantDish>>();
-// builder.Services.AddTransient<IRepository<Rating>, Repository<Rating>>();
+// DI
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddDbContext<MainContext>();
+
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

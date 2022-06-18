@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using RestaurantService.Repositories.Interfaces;
 
 namespace RestaurantService.Repositories.Implementations;
 
