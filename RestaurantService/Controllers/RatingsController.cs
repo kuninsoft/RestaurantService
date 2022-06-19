@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantService.Models;
 using RestaurantService.Services;
@@ -18,12 +19,14 @@ public class RatingsController : ControllerBase
     }
 
     [HttpGet("")]
+    [AllowAnonymous]
     public IActionResult Get()
     {
         return Ok(_unitOfWork.Ratings.GetRatingsWithFullInfo());
     }
     
     [HttpGet("{id:int}")]
+    [AllowAnonymous]
     public IActionResult Get(int id)
     {
         Rating? rating = _unitOfWork.Ratings.GetRatingWithFullInfoOrDefault(id);
@@ -37,6 +40,7 @@ public class RatingsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize]
     public IActionResult Post([FromBody] Rating rating)
     {
         try
@@ -57,6 +61,7 @@ public class RatingsController : ControllerBase
     }
 
     [HttpPut]
+    [Authorize(Roles="Moderator")]
     public IActionResult Put([FromBody] Rating rating)
     {
         try
@@ -77,6 +82,7 @@ public class RatingsController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles="Moderator")]
     public IActionResult Delete(int id)
     {
         try

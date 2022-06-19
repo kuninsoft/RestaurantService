@@ -6,13 +6,9 @@ public class User
 {
     [Key]
     public int Id { get; set; }
-    [Required]
     public string? Username { get; set; }
-    [Required]
-    public string? PasswordHash { get; set; }
-    public string? PasswordSalt { get; set; }
-    [Required]
-    public Role Role { get; set; }
+    public string? Password { get; set; }
+    public string? Role { get; set; }
 
     public ICollection<Rating> RatingsWritten { get; set; } = new List<Rating>();
 }

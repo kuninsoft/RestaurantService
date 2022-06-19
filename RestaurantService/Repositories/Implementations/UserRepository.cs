@@ -26,6 +26,16 @@ public class UserRepository : BaseRepository<User>, IUserRepository
         
         if (user is null) return false;
 
-        return user.Role == Role.Moderator;
+        return user.Role == "Moderator";
+    }
+
+    public bool Exists(string username)
+    {
+        return GetAll().Any(user => user.Username == username);
+    }
+
+    public User? ReturnUserWithCredentialsOrDefault(string username, string password)
+    {
+        return GetAll().FirstOrDefault(user => user.Username == username && user.Password == password);
     }
 }

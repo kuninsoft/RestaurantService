@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RestaurantService.Models;
 using RestaurantService.Services;
@@ -18,12 +19,14 @@ public class RestaurantsController : ControllerBase
     }
 
     [HttpGet("")]
+    [AllowAnonymous]
     public IActionResult Get()
     {
         return Ok(_unitOfWork.Restaurants.GetRestaurantsWithFullInfo());
     }
     
     [HttpGet("{id:int}")]
+    [AllowAnonymous]
     public IActionResult Get(int id)
     {
         Restaurant? restaurant = _unitOfWork.Restaurants.GetRestaurantWithFullInfoOrDefault(id);
@@ -37,6 +40,7 @@ public class RestaurantsController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles="Moderator")]
     public IActionResult Post([FromBody] Restaurant restaurant)
     {
         try
@@ -57,6 +61,7 @@ public class RestaurantsController : ControllerBase
     }
 
     [HttpPut]
+    [Authorize(Roles="Moderator")]
     public IActionResult Put([FromBody] Restaurant restaurant)
     {
         try
@@ -77,6 +82,7 @@ public class RestaurantsController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [Authorize(Roles="Moderator")]
     public IActionResult Delete(int id)
     {
         try
