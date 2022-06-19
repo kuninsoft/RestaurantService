@@ -9,19 +9,23 @@ public class UserRepository : BaseRepository<User>, IUserRepository
     public UserRepository(DbContext context) : base(context)
     {
     }
-
-    public User FindUserByUsername(string name)
-    {
-        return GetUsersWithRatings().First(user => user.Username == name);
-    }
-
-    public User? FindUserByUsernameOrDefault(string name)
-    {
-        return GetUsersWithRatings().FirstOrDefault(user => user.Username == name);
-    }
-
+    
     public IEnumerable<User> GetUsersWithRatings()
     {
         return Entities.Include(user => user.RatingsWritten).ToList();
+    }
+
+    public User? GetUserWithRatingOrDefault(int id)
+    {
+        return GetUsersWithRatings().FirstOrDefault(user => user.Id == id);
+    }
+
+    public bool IsModerator(int id)
+    {
+        User? user = Get(id);
+        
+        if (user is null) return false;
+
+        return user.Role == Role.Moderator;
     }
 }

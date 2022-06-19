@@ -10,22 +10,17 @@ public class RestaurantRepository : BaseRepository<Restaurant>, IRestaurantRepos
     {
     }
 
-    public Restaurant FindRestaurantByName(string name)
-    {
-        return GetRestaurantsWithFullInfo().First(restaurant => restaurant.Name == name);
-    }
-
-    public Restaurant? FindRestaurantByNameOrDefault(string name)
-    {
-        return GetRestaurantsWithFullInfo().FirstOrDefault(restaurant => restaurant.Name == name);
-    }
-
     public IEnumerable<Restaurant> GetRestaurantsWithFullInfo()
     {
         return Entities
             .Include(restaurant => restaurant.Menu)
             .Include(restaurant => restaurant.Ratings)
             .ToList();
+    }
+
+    public Restaurant? GetRestaurantWithFullInfoOrDefault(int id)
+    {
+        return GetRestaurantsWithFullInfo().FirstOrDefault(restaurant => restaurant.Id == id);
     }
 
     public decimal GetRestaurantAverageRating(Restaurant restaurant)

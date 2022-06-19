@@ -5,7 +5,11 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // DI
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+                .AddNewtonsoftJson(options => 
+                    options.SerializerSettings.ReferenceLoopHandling
+                        = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 builder.Services.AddDbContext<MainContext>();
 
 // Swagger

@@ -28,13 +28,22 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
         return Entities.Where(predicate);
     }
 
-    public virtual T Add(T entity)
+    public T Add(T entity)
     {
         return Entities.Add(entity).Entity;
     }
 
-    public void Delete(T entity)
+    public T Update(T entity)
     {
+        return Entities.Update(entity).Entity;
+    }
+
+    public void Delete(int id)
+    {
+        T? entity = Get(id);
+
+        if (entity is null) return;
+        
         Entities.Remove(entity);
     }
 }

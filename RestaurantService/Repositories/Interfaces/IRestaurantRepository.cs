@@ -4,9 +4,8 @@ namespace RestaurantService.Repositories.Interfaces;
 
 public interface IRestaurantRepository : IBaseRepository<Restaurant>
 {
-    Restaurant FindRestaurantByName(string name);
-    Restaurant? FindRestaurantByNameOrDefault(string name);
     IEnumerable<Restaurant> GetRestaurantsWithFullInfo();
+    Restaurant? GetRestaurantWithFullInfoOrDefault(int id);
     decimal GetRestaurantAverageRating(Restaurant restaurant);
     IEnumerable<Restaurant> GetBestRatedRestaurants(int amount);
     

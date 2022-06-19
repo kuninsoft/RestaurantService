@@ -11,6 +11,7 @@ public class Dish
     [Required]
     public decimal Price { get; set; }
     
+    [Required]
     public int RestaurantId { get; set; }
     public Restaurant? Restaurant { get; set; }
 }
