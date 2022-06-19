@@ -5,7 +5,6 @@ using RestaurantService.Services;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// DI
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<ITokenGenerationService, TokenGenerationService>();
 
@@ -29,16 +28,13 @@ builder.Services.AddControllers()
 
 builder.Services.AddDbContext<MainContext>();
 
-// Swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
 app.UseHttpsRedirection();
